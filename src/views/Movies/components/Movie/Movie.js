@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
 export default (props) => {
   const { movie } = props;
   const classes = useStyles();
-
   return (
     <Grid item xs={6} sm={3} className={classes.grid}>
       <img className={classes.img} src={movie.img} alt={movie.title} />

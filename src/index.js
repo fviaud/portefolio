@@ -1,16 +1,26 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
+
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
 
-ReactDOM.render(
-  <React.StrictMode>
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
+import { blue, purple, amber, red } from "@material-ui/core/colors";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: red,
+    secondary: {
+      main: amber[800],
+      // light: blue
+    },
+  },
+});
+
+console.log("theme->", theme);
+const rootElement = document.getElementById("root");
+render(
+  <MuiThemeProvider theme={theme}>
     <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+  </MuiThemeProvider>,
+  rootElement
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
