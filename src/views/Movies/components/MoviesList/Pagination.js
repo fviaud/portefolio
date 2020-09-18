@@ -11,16 +11,19 @@ const CustomRouterLink = forwardRef((props, ref) => (
   </div>
 ));
 
-export default function PaginationLink() {
+// export default function PaginationLink() {
+export default (props) => {
+  const { total_pages } = props;
   return (
     <Route>
       {({ location }) => {
         const query = new URLSearchParams(location.search);
         const page = parseInt(query.get("page") || "1", 10);
+
         return (
           <Pagination
             page={page}
-            count={25}
+            count={total_pages}
             renderItem={(item) => (
               <PaginationItem
                 component={CustomRouterLink}
@@ -33,4 +36,4 @@ export default function PaginationLink() {
       }}
     </Route>
   );
-}
+};

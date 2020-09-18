@@ -1,11 +1,15 @@
-import React, { useContext } from "react";
-import { NavLink as RouterLink } from "react-router-dom";
-
+import React from "react";
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, IconButton } from "@material-ui/core";
+import { fade, makeStyles } from "@material-ui/core/styles";
+import { AppBar, Toolbar, IconButton, InputBase } from "@material-ui/core";
 
-import MenuIcon from "@material-ui/icons/Menu";
+import {
+  Search as SearchIcon,
+  MoreVert as MoreIcon,
+  Notifications as NotificationsIcon,
+  Menu as MenuIcon,
+  AccountCircle,
+} from "@material-ui/icons";
 
 const drawerWidth = 240;
 
@@ -13,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
-  flexGrow: {
-    flexGrow: 1,
-  },
+  // flexGrow: {
+  //   flexGrow: 1,
+  // },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
@@ -45,19 +49,37 @@ const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
+
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(3),
+      width: "auto",
+    },
+  },
+  searchIcon: {
+    width: theme.spacing(7),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 }));
 
 const Topbar = (props) => {
   const classes = useStyles();
 
-  const {
-    handleDrawerOpen,
-    open,
-    commandes,
-    projets,
-    commandesGestion,
-    projetsGestion,
-  } = props;
+  const { handleDrawerOpen, open } = props;
 
   return (
     <AppBar
@@ -68,7 +90,6 @@ const Topbar = (props) => {
     >
       <Toolbar>
         <IconButton
-          id="btn-menu"
           color="inherit"
           aria-label="open drawer"
           onClick={handleDrawerOpen}
@@ -79,45 +100,20 @@ const Topbar = (props) => {
         >
           <MenuIcon />
         </IconButton>
-        <RouterLink to="/dashboard">
-          <img
-            id="logo"
-            alt="Logo"
-            src="/images/logo_getIT_small_transparent.png"
-            height="20"
+
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon />
+          </div>
+          <InputBase
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            inputProps={{ "aria-label": "search" }}
           />
-        </RouterLink>
-
-        <div className={classes.flexGrow} />
-
-        {/* {curentUser && curentUser.role === "admin gestion" ? (
-          <RouterLink to="/management" id="gestion">
-            <IconButton aria-label="gestion">
-              <Badge
-                data-testid="nb-item-gestion"
-                id="nb-item-gestion"
-                badgeContent={commandesGestion + projetsGestion}
-                color="primary"
-              >
-                <Check />
-              </Badge>
-            </IconButton>
-          </RouterLink>
-        ) : null} */}
-
-        {/* <RouterLink to="/basket" id="basket">
-          <IconButton aria-label="cart">
-            <Badge
-              data-testid="nb-item-basket"
-              id="nb-item-basket"
-              badgeContent={commandes + projets}
-              color="primary"
-            >
-              <ShoppingCartIcon />
-            </Badge>
-          </IconButton>
-        </RouterLink>
-        <UserMenu id="avatar"/> */}
+        </div>
       </Toolbar>
     </AppBar>
   );

@@ -15,6 +15,7 @@ const apiMovieMap = (m) => ({
   title: m.title,
   details: `${m.release_date} | ${m.vote_average}/10 (${m.vote_count})`,
   description: m.overview,
+  note: m.vote_average / 2,
 });
 
 export const getMovies = async (page, query) => {
@@ -24,7 +25,10 @@ export const getMovies = async (page, query) => {
         query ? `query=${query}&` : ""
       }language=fr-FR&page=` + page
     );
-    return response.data.results.map(apiMovieMap);
+    return {
+      values: response.data.results.map(apiMovieMap),
+      total_pages: response.data.total_pages,
+    };
   } catch (error) {}
 };
 
@@ -46,10 +50,10 @@ export const getMovies2 = async (setState, page, query) => {
   }
 };
 
-export const wrapPromise = (page) => {
+export const wrapPromise = (page, query) => {
   let status = "pending";
   let result;
-  let suspender = getMovies(page).then(
+  let suspender = getMovies(page, query).then(
     (r) => {
       status = "success";
       result = r;

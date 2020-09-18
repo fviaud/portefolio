@@ -51,8 +51,7 @@ const Sidebar = (props) => {
 
   return (
     <Drawer
-      // variant="permanent"
-      variant="persistent"
+      variant="permanent"
       className={clsx(classes.drawer, {
         [classes.drawerOpen]: open,
         [classes.drawerClose]: !open,

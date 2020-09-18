@@ -10,41 +10,41 @@ import TopBar from "./TopBar";
 import Copyright from "./Copyright";
 
 const drawerWidth = 240;
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex"
+    display: "flex",
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
+      duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: -drawerWidth
+    marginLeft: -drawerWidth,
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
+      duration: theme.transitions.duration.enteringScreen,
     }),
-    marginLeft: 0
+    marginLeft: 0,
   },
   inputRoot: {
-    color: "inherit"
+    color: "inherit",
   },
   container: {
     paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4)
+    paddingBottom: theme.spacing(4),
   },
-  appBarSpacer: theme.mixins.toolbar
+  appBarSpacer: theme.mixins.toolbar,
 }));
 
 export default function Main(props) {
   const { children } = props;
 
   const classes = useStyles();
-
+  const [query, setQuery] = useState(null);
   const [openSidebar, setOpenSidebar] = useState(false);
 
   const handleSidebarClose = () => {
@@ -58,15 +58,23 @@ export default function Main(props) {
   return (
     <div className={classes.root}>
       {/* <CssBaseline /> */}
-      <TopBar isSideBarOpen={openSidebar} onSidebarOpen={handleSidebar} />
+      <TopBar
+        isSideBarOpen={openSidebar}
+        onSidebarOpen={handleSidebar}
+        setQuery={setQuery}
+      />
       <Sidebar onClose={handleSidebarClose} open={openSidebar} />
       <main
         className={clsx(classes.content, {
-          [classes.contentShift]: openSidebar
+          [classes.contentShift]: openSidebar,
         })}
       >
         <div className={classes.appBarSpacer} />
-        {children}
+
+        {/* {children} */}
+        {React.Children.map(children, (child) => {
+          return React.cloneElement(child, { query });
+        })}
         <Box pt={4}>
           <Copyright />
         </Box>
@@ -76,5 +84,5 @@ export default function Main(props) {
 }
 
 Main.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };

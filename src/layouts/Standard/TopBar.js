@@ -11,65 +11,66 @@ import {
   MenuItem,
   Badge,
   InputBase,
-  IconButton
+  IconButton,
 } from "@material-ui/core";
 import {
   Search as SearchIcon,
   MoreVert as MoreIcon,
   Notifications as NotificationsIcon,
   Menu as MenuIcon,
-  AccountCircle
+  AccountCircle,
 } from "@material-ui/icons";
 
 import AvatarImg from "../../assets/avatar/face-2.jpg";
+import { SearchInput } from "components";
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   grow: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   sectionDesktop: {
     display: "none",
     [theme.breakpoints.up("md")]: {
-      display: "flex"
-    }
+      display: "flex",
+    },
   },
   sectionMobile: {
     display: "flex",
     [theme.breakpoints.up("md")]: {
-      display: "none"
-    }
+      display: "none",
+    },
   },
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
+      backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
-      width: "auto"
-    }
+      width: "auto",
+    },
   },
   searchIcon: {
     width: theme.spacing(7),
@@ -78,7 +79,7 @@ const useStyles = makeStyles(theme => ({
     pointerEvents: "none",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   // inputInput: {
   //   padding: theme.spacing(1, 1, 1, 7),
@@ -89,7 +90,7 @@ const useStyles = makeStyles(theme => ({
   //   }
   // },
   inputRoot: {
-    color: "inherit"
+    color: "inherit",
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
@@ -98,16 +99,16 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       width: 80,
       "&:focus": {
-        width: 200
-      }
-    }
+        width: 200,
+      },
+    },
   },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   toolbar: {
-    paddingRight: "24px" // keep right padding when drawer closed
-  }
+    paddingRight: "24px", // keep right padding when drawer closed
+  },
 }));
 
 export default function Header(props) {
@@ -117,9 +118,9 @@ export default function Header(props) {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const { isSideBarOpen, onSidebarOpen } = props;
+  const { isSideBarOpen, onSidebarOpen, setQuery } = props;
 
-  const handleProfileMenuOpen = event => {
+  const handleProfileMenuOpen = (event) => {
     console.log("Target->", event.currentTarget);
     setAnchorEl(event.currentTarget);
   };
@@ -133,7 +134,7 @@ export default function Header(props) {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = event => {
+  const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
@@ -198,9 +199,9 @@ export default function Header(props) {
   return (
     <React.Fragment>
       <AppBar
-        position="absolute"
+        position="fixed"
         className={clsx(classes.appBar, {
-          [classes.appBarShift]: isSideBarOpen
+          [classes.appBarShift]: isSideBarOpen,
         })}
       >
         <Toolbar className={classes.toolbar}>
@@ -216,7 +217,7 @@ export default function Header(props) {
           {/* <Typography variant="h6" noWrap>
       Persistent drawer
     </Typography> */}
-          <div className={classes.search}>
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -224,11 +225,12 @@ export default function Header(props) {
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,
-                input: classes.inputInput
+                input: classes.inputInput,
               }}
               inputProps={{ "aria-label": "search" }}
             />
-          </div>
+          </div> */}
+          <SearchInput setQuery={setQuery} />
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             {/* <IconButton aria-label="show 4 new mails" color="inherit">

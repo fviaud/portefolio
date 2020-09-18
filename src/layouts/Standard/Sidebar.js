@@ -13,7 +13,7 @@ import {
   ListItemText,
   ListItemIcon,
   ListItem,
-  List
+  List,
 } from "@material-ui/core";
 import {
   StarBorder,
@@ -29,57 +29,58 @@ import {
   Receipt as ReceiptIcon,
   SupervisorAccount as SupervisorAccountIcon,
   LineStyle as LineStyleIcon,
-  Ballot as BallotIcon
+  Ballot as BallotIcon,
 } from "@material-ui/icons";
 
 const drawerWidth = 240;
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
   },
+
   drawerPaper: {
-    position: "relative",
+    // position: "relative",
     whiteSpace: "nowrap",
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   drawerPaperClose: {
     overflowX: "hidden",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
+      duration: theme.transitions.duration.leavingScreen,
     }),
     width: theme.spacing(7),
     [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9)
-    }
+      width: theme.spacing(9),
+    },
   },
   drawerHeader: {
     display: "flex",
     alignItems: "center",
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
   },
   toolbarIcon: {
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-end",
     padding: "0 8px",
-    ...theme.mixins.toolbar
+    ...theme.mixins.toolbar,
   },
   root: {
     width: "100%",
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
   nested: {
-    paddingLeft: theme.spacing(4)
-  }
+    paddingLeft: theme.spacing(4),
+  },
 }));
 
 export default function Sidebar(props) {
@@ -103,7 +104,7 @@ export default function Sidebar(props) {
       anchor="left"
       open={open}
       classes={{
-        paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
+        paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
       }}
     >
       <div className={classes.drawerHeader}>
@@ -120,7 +121,13 @@ export default function Sidebar(props) {
         // }
         className={classes.root}
       >
-        <ListItem button>
+        <ListItem
+          button
+          button
+          // className={classes.nested}
+          component={Link}
+          to="/auth"
+        >
           <ListItemIcon>
             <DashboardIcon fontSize="small" />
           </ListItemIcon>
@@ -232,5 +239,5 @@ export default function Sidebar(props) {
 }
 Sidebar.propTypes = {
   onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired
+  open: PropTypes.bool.isRequired,
 };

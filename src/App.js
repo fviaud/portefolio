@@ -14,7 +14,7 @@ function App() {
         <Switch>
           <Route path="/auth" component={Auth} />
           <Route path="/movies" component={Movies} />
-          <Redirect to="/movies" />
+          <Redirect to="/auth" />
         </Switch>
       </Router>
     </>

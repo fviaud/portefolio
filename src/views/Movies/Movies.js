@@ -4,7 +4,7 @@ import { RouteWithLayout, LaunchScreen } from "components";
 import {
   Main as MainLayout,
   Minimal as MinimalLayout,
-  New as NewLayout,
+  Standard as StandardLayout,
 } from "layouts";
 
 import Home from "./components/Home";
@@ -15,7 +15,11 @@ export default () => {
   return (
     // <Suspense fallback={<LaunchScreen />}>
     <Switch>
-      <RouteWithLayout component={Home} layout={MainLayout} path="/movies" />
+      <RouteWithLayout
+        component={Home}
+        layout={StandardLayout}
+        path="/movies"
+      />
       <Redirect to="/movies" />
     </Switch>
     // </Suspense>
