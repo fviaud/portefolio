@@ -13,14 +13,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default (props) => {
   const classes = useStyles();
-  const { resource } = props;
-  const movies = resource.read();
+  // const { resource } = props;
+  // const movies = resource.read();
+
+  const { movies } = props;
+
   return (
     <Container fixed>
       <Grid container spacing={3}>
-        {movies.values.map((movie, index) => (
-          <Movie movie={movie} index={index} />
-        ))}
+        {movies &&
+          movies.values.map((movie, index) => (
+            <Movie movie={movie} index={index} />
+          ))}
       </Grid>
       <Box className={classes.contentBody}>
         <Pagination total_pages={movies.total_pages} />
