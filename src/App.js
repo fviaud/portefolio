@@ -8,7 +8,7 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import { Auth, Movies } from "views";
+import { Auth, Movies, Users } from "views";
 
 function App() {
   return (
@@ -18,7 +18,8 @@ function App() {
         <Switch>
           <Route path="/auth" component={Auth} />
           <Route path="/movies" component={Movies} />
-          <Redirect to="/auth" />
+          <Route path="/users" component={Users} />
+          <Redirect to="/users" />
         </Switch>
       </Router>
     </>

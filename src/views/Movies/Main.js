@@ -1,18 +1,19 @@
 import React, { Suspense, useEffect } from "react";
-import "../store";
+import "./components/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { LaunchScreen } from "components";
-import { MoviesList } from "..";
+import { MoviesList } from "./components";
 import { wrapPromise } from "api/api.movie";
 
-import { fetchMovieAction } from "../store/actions";
+import { fetchMovieAction } from "./components/store/actions";
 
 export default (props) => {
   // const { query } = props;
   // const history = useHistory();
   const location = useLocation();
   const page = new URLSearchParams(location.search).get("page");
+  const search = new URLSearchParams(location.search).get("search");
 
   // useEffect(() => {
   //   history.push("/movies");
@@ -21,7 +22,7 @@ export default (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchMovieAction(page));
+    dispatch(fetchMovieAction(page, search));
   }, [dispatch, location]);
 
   const movies = useSelector((state) => {

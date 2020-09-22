@@ -1,5 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
+
+import { useHistory } from "react-router-dom";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
@@ -69,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default ({ setQuery }) => {
   const classes = useStyles();
+  const history = useHistory();
   const { register, handleSubmit } = useForm({
     defaultValues: {
       query: "",
@@ -76,7 +79,8 @@ export default ({ setQuery }) => {
   });
 
   const onSubmit = (data) => {
-    setQuery(data.query);
+    // setQuery(data.query);
+    history.push(`/movies${data.query === "" ? "" : `?search=${data.query}`}`);
   };
 
   return (

@@ -7,7 +7,7 @@ import {
   Standard as StandardLayout,
 } from "layouts";
 
-import Home from "./components/Home";
+import Main from "./Main";
 
 // const LazyMovies = lazy(() => import("./components/Home/Home"));
 
@@ -15,12 +15,8 @@ export default () => {
   return (
     // <Suspense fallback={<LaunchScreen />}>
     <Switch>
-      <RouteWithLayout
-        component={Home}
-        layout={StandardLayout}
-        path="/movies"
-      />
-      <Redirect to="/movies" />
+      <RouteWithLayout component={Main} layout={StandardLayout} path="/users" />
+      <Redirect to="/users" />
     </Switch>
     // </Suspense>
   );

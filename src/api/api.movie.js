@@ -32,24 +32,6 @@ export const getMovies = async (page, query) => {
   } catch (error) {}
 };
 
-export const getMovies2 = async (setState, page, query) => {
-  try {
-    const response = await apiMovie.get(
-      `/${query ? "search" : "discover"}/movie?${
-        query ? `query=${query}&` : ""
-      }language=fr-FR&page=` + page
-    );
-
-    setState((state) => ({
-      values: [...state.values, ...response.data.results.map(apiMovieMap)],
-      hasMore: page < response.data.total_pages,
-      error: false,
-    }));
-  } catch (error) {
-    setState({ values: [], error: error.message });
-  }
-};
-
 export const wrapPromise = (page, query) => {
   let status = "pending";
   let result;

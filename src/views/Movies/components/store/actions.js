@@ -25,11 +25,11 @@ export const fetchMovieErrorAction = (error) => {
   };
 };
 
-export const fetchMovieAction = (page) => {
+export const fetchMovieAction = (page, search) => {
   return async (dispatch) => {
     dispatch(requestMovieAction());
     try {
-      const response = await getMovies(page);
+      const response = await getMovies(page, search);
       dispatch(fetchMovieSuccessAction(response));
     } catch (e) {
       dispatch(fetchMovieErrorAction(e));
